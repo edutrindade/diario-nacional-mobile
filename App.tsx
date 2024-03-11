@@ -6,9 +6,9 @@ import {
   Roboto_700Bold,
 } from '@expo-google-fonts/roboto';
 import { Girassol_400Regular } from '@expo-google-fonts/girassol';
-import Home from './src/screens/Home';
 import { StatusBar } from 'expo-status-bar';
 import { QueryClient, QueryClientProvider } from 'react-query';
+import Routes from './src/routes';
 
 export default function App() {
   const queryClient = new QueryClient();
@@ -27,7 +27,7 @@ export default function App() {
   return (
     <QueryClientProvider client={queryClient}>
       <SafeAreaView className='flex-1 bg-white mt-8' style={{ marginTop: statusBarHeight }}>
-        <Home />
+        <Routes />
         <StatusBar style='auto' />
       </SafeAreaView>
     </QueryClientProvider>

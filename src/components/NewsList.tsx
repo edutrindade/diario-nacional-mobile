@@ -1,4 +1,5 @@
 import React from 'react';
+import { useNavigation } from '@react-navigation/native';
 import { View, Text, FlatList, Image, TouchableOpacity } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { INews } from '../interfaces/INews';
@@ -10,8 +11,10 @@ interface NewsListProps {
 }
 
 const NewsList = ({ data, from }: NewsListProps) => {
+  const navigation = useNavigation();
+
   const renderNewsItem = ({ item }: { item: INews }) => (
-    <TouchableOpacity onPress={() => handleNewsClick(item)}>
+    <TouchableOpacity onPress={() => handleNewsPress(item)}>
       <View className='flex-row p-3'>
         <Image
           source={{
@@ -20,7 +23,7 @@ const NewsList = ({ data, from }: NewsListProps) => {
           style={{ width: 150, height: 100, marginRight: 12 }}
         />
         <View className='flex-1'>
-          <Text style={{ fontSize: theme.size.md, fontFamily: theme.fonts.Roboto_700 }}>
+          <Text style={{ fontSize: theme.size.md, fontFamily: theme.fonts.Roboto_400 }}>
             {item.titulo}
           </Text>
           <Text className='text-gray-400'>{item.data_publicacao}</Text>
@@ -30,7 +33,6 @@ const NewsList = ({ data, from }: NewsListProps) => {
   );
 
   const calculateNumOfDays = (date: string) => {
-    console.log('date', date);
     const today = new Date();
     const [month, day, year] = date.split('-');
     const newsDate = new Date(`${year}-${month}-${day}`);
@@ -39,8 +41,8 @@ const NewsList = ({ data, from }: NewsListProps) => {
     return days;
   };
 
-  const handleNewsClick = (newsItem: INews) => {
-    console.log('Clicou na notícia', newsItem);
+  const handleNewsPress = (newsItem: INews) => {
+    navigation.navigate('Details', { newsItem: newsItem });
   };
 
   const newsData = data.slice(1);
@@ -70,20 +72,28 @@ const NewsList = ({ data, from }: NewsListProps) => {
   );
 };
 
-const NewsItem = ({ item }: { item: INews }) => (
-  <TouchableOpacity>
-    <View className='relative w-full h-64'>
-      <Image
-        source={{
-          uri: `https://agenciadenoticias.ibge.gov.br/${JSON.parse(item.imagens).image_fulltext}`,
-        }}
-        className='w-full h-full object-cover'
-      />
-    </View>
-    <View className='relative bottom-0 left-0 right-0 bg-black bg-opacity-50 px-4 py-2'>
-      <Text className='text-white font-bold text-xl'>{item.titulo}</Text>
-    </View>
-  </TouchableOpacity>
-);
+const NewsItem = ({ item }: { item: INews }) => {
+  const navigation = useNavigation();
+
+  const handleNewsPress = (newsItem: INews) => {
+    navigation.navigate('Details', { newsItem: newsItem });
+  };
+
+  return (
+    <TouchableOpacity onPress={() => handleNewsPress(item)}>
+      <View className='relative w-full h-64'>
+        <Image
+          source={{
+            uri: `https://agenciadenoticias.ibge.gov.br/${JSON.parse(item.imagens).image_fulltext}`,
+          }}
+          className='w-full h-full object-cover'
+        />
+      </View>
+      <View className='relative bottom-0 left-0 right-0 bg-black bg-opacity-50 px-4 py-2'>
+        <Text className='text-white font-bold text-xl'>{item.titulo}</Text>
+      </View>
+    </TouchableOpacity>
+  );
+};
 
 export default NewsList;

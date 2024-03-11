@@ -3,6 +3,7 @@ import { Text, TouchableOpacity, View } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { Calendar, LocaleConfig } from 'react-native-calendars';
 import { theme } from '../theme';
+import { useNavigation } from '@react-navigation/native';
 
 LocaleConfig.locales['br'] = {
   monthNames: [
@@ -47,6 +48,7 @@ interface IFooterProps {
 const Footer = ({ setFrom }: IFooterProps) => {
   const [isCalendarVisible, setCalendarVisible] = useState(false);
   const [selectedDate, setSelectedDate] = useState('');
+  const navigation = useNavigation();
 
   const handleCalendarPress = () => {
     setCalendarVisible(true);
@@ -56,9 +58,14 @@ const Footer = ({ setFrom }: IFooterProps) => {
     const { dateString } = day;
     const [year, month, dayOfMonth] = dateString.split('-');
     const formattedDate = `${month}-${dayOfMonth}-${year}`;
-    //setSelectedDate(formattedDate);
-    setFrom(formattedDate);
     setCalendarVisible(false);
+    navigation.navigate('Home');
+    setFrom(formattedDate);
+  };
+
+  const handleHomePress = () => {
+    navigation.navigate('Home');
+    setFrom(undefined);
   };
 
   return (
@@ -87,20 +94,20 @@ const Footer = ({ setFrom }: IFooterProps) => {
       )}
 
       <View className='flex-row justify-between items-center p-4 bg-white'>
-        <TouchableOpacity onPress={() => setFrom(undefined)}>
+        <TouchableOpacity onPress={handleHomePress}>
           <Ionicons name='home-outline' size={theme.size.xl} color={theme.colors.black} />
         </TouchableOpacity>
-        <TouchableOpacity onPress={() => console.log('Navegar para Perfil')}>
+        <TouchableOpacity onPress={() => navigation.navigate('Profile')}>
           <Ionicons name='person-outline' size={theme.size.xl} color={theme.colors.black} />
         </TouchableOpacity>
         <TouchableOpacity onPress={handleCalendarPress}>
           <Ionicons name='calendar' size={theme.size.xl} color={theme.colors.black} />
         </TouchableOpacity>
         <TouchableOpacity onPress={() => console.log('Navegar para Notificações')}>
-          <Ionicons name='notifications-outline' size={theme.size.xl} color={theme.colors.black} />
+          <Ionicons name='notifications-outline' size={theme.size.xl} color={theme.colors.gray} />
         </TouchableOpacity>
         <TouchableOpacity onPress={() => console.log('Navegar para Configurações')}>
-          <Ionicons name='settings-outline' size={theme.size.xl} color={theme.colors.black} />
+          <Ionicons name='settings-outline' size={theme.size.xl} color={theme.colors.gray} />
         </TouchableOpacity>
       </View>
     </>
