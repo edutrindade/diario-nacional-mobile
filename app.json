@@ -30,10 +30,13 @@
     "extra": {
       "eas": {
         "projectId": "832d344d-fb2d-4ebc-9216-0492e17219e1"
+      },
+      "build": {
+        "runtimeVersion": "50.0.0"
       }
     },
     "runtimeVersion": {
-      "policy": "appVersion"
+      "policy": "sdkVersion"
     },
     "updates": {
       "url": "https://u.expo.dev/832d344d-fb2d-4ebc-9216-0492e17219e1"
