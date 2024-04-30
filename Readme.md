@@ -33,7 +33,11 @@ Outra possibilidade é ter um emulador instalado em sua máquina. Ao executar o 
 O Diário de Notícias tem como objetivo fornecer um ambiente amigável para os usuários se manterem informados sobre os acontecimentos mais recentes publicados pelo IBGE. Ele oferece uma página inicial simples onde os usuários podem visualizar as últimas notícias e carregar mais notícias conforme desejarem. No cabeçalho, é possível abrir uma barra de Menu ou um botão de pesquisa. Pode-se pesquisar livremente para retornar mensagens filtradas.
 
 
-![Home](https://i.ibb.co/cX580Gm/home.jpg "Home")![Details](https://i.ibb.co/PwXPGwJ/details.jpg) 
+![Home](https://i.ibb.co/nb7Rn3v/Design01.png "Home")
+
+![Details](https://i.ibb.co/5hFBC0h/Design02.png "Details") 
+
+![Profile](https://i.ibb.co/yFt9sKy/Design03.png "Profile")
 
 De modo a componentizar um pouco a aplicação, foram implementados os componentes Header, Footer, NewsList e Sidebar. Entende-se que, para a pouca complexidade do proejto, são necessários para suprir a construção e organização das telas. Em um projeto maior, com certeza seriam revisadas algumas regras aplicadas, bem com o uso de context ou redux.
 
